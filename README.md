@@ -56,10 +56,13 @@ of webpages you just copy the link and paste it. **Don't forget to add the comma
 
 # What's next
 
- * I just want to make a reminder alert that appear each certain time. The alert will
+ * ~~I just want to make a reminder alert that appear each certain time. The alert will
 appear periodically until you update your github. The idea is to use tkinter for now
-until get better ways to give the notification in Windows. 
+until get better ways to give the notification in Windows.~~ The idea of the reminder was
+done with the marvelous library [`win10toast`](https://github.com/jithurjacob/Windows-10-Toast-Notifications).
 
+ * Make it an executable script to run when the computer starts.
+ 
  * If I finish, I want to know how to edit everything to do it in Linux. I don't have
  a Mac so I can't work in that for now.
 
