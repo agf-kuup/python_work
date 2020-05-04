@@ -59,7 +59,7 @@ for i in d['programs']:
     time.sleep(1)
     print("    {}".format(i))
 
-githubcheck=input("Do you want to check your github? Yes(y) / No(n)")
+githubcheck=input("Do you want to check your github? Yes(y) / No(n)\n")
 if githubcheck=='y':
     subprocess.call(["python", "pushed.py"])
 else:
