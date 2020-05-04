@@ -1,11 +1,13 @@
-import subprocess               # Open subprocesses in computer.
-import requests                 # Ask for webpages.
-import os                       # Create things in the computer.
-import sys                      # Permit close if main wasn't run.
-import simplejson as json       # To edit content in file data.
-from datetime import date       # Get the date of today.
-
+import subprocess                       # Open subprocesses in computer.
+import requests                         # Ask for webpages.
+import os                               # Create things in the computer.
+import sys                              # Permit close if main wasn't run.
+import time                             # Sleep program until 15 minutes later.
+from win10toast import ToastNotifier    # Windows Notification
+import simplejson as json               # To edit content in file data.
+from datetime import date               # Get the date of today.
 from extra import getDate
+
 today=date.today()
 ######################################
 # Running a script to know if today I have updated my github.
@@ -63,6 +65,25 @@ else:
         flag=True
         print("\nYou have done something today! :-)")
 
-# if flag==False:
-#     while True:
-#         X=input("Do you want me to remind you to push in your repos? Yes (y)/ No (n)")
+if flag==True:
+    while True:
+        X=input("Do you want me to remind you to push in your repos? Yes (y)/ No (n)\n")
+        if X=='n':
+            sys.exit()
+        else:
+            while True:
+                r=requests.get("https://github.com/"+username)
+                if 'fill="#ebedf0" data-count="0" data-date="{}"'.format(today) in r.content.decode("UTF-8"):
+                    toaster = ToastNotifier()
+                    toaster.show_toast("Hey! You haven't pushed yet!!",
+                                        "Continue working to avoid that empty square!!",
+                                        icon_path="icon.ico",
+                                        duration=10)
+                else:
+                    toaster = ToastNotifier()
+                    toaster.show_toast("Nice! You were productive today :-)!!",
+                                        "See you tomorrow!!",
+                                        icon_path="icon.ico",
+                                        duration=10)
+                    sys.exit()
+                time.sleep(60*15)
