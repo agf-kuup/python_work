@@ -1,5 +1,5 @@
 # python_work
- Python script to run programs and open tabs in the moment is ran.
+ Python script to run programs and open tabs in the moment the script is executed.
 
 # How it works
 
@@ -61,8 +61,11 @@ appear periodically until you update your github. The idea is to use tkinter for
 until get better ways to give the notification in Windows.~~ The idea of the reminder was
 done with the marvelous library [`win10toast`](https://github.com/jithurjacob/Windows-10-Toast-Notifications).
 
- * Make it an executable script to run when the computer starts.
- 
+ * ~~Avoid only using the terminal to show text.~~ To avoid this, I added popup windows with [`PySimpleGui`](https://pysimplegui.readthedocs.io/en/latest/). 
+ It's a delightful library! Thanks, [@PySimpleGui](https://github.com/PySimpleGUI/PySimpleGUI)!
+
+ * Make it an executable script to run when the computer starts. (Library expected to use: pyinstaller)
+
  * If I finish, I want to know how to edit everything to do it in Linux. I don't have
  a Mac so I can't work in that for now.
 
