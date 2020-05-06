@@ -37,11 +37,17 @@ data_file.close()                                   # Don't forget to close the 
 
 today=date.today()                                  # Info for checking the day and verify if the have been pushes or not.
 def Have_you_finished_those_errands(squidward):     # Asking info in github.
-    r=requests.get("https://github.com/"+squidward) # Requests asking for the content in that page.
-    if 'fill="#ebedf0" data-count="0" data-date="{}"'.format(today) in r.content.decode("UTF-8"): # We find the color of the square of today
-        return False
-    else:
-        return True
+    try:
+        r=requests.get("https://github.com/"+squidward) # Requests asking for the content in that page.
+        if r.status_code==200:
+            if 'fill="#ebedf0" data-count="0" data-date="{}"'.format(today) in r.content.decode("UTF-8"): # We find the color of the square of today
+                return False
+            else:
+                return True
+    except requests.ConnectionError:
+        alert="You don't have internet connection.\nI can't check if you updated something :("
+        sg.PopupAutoClose(alert,title="No connection :(",auto_close_duration=10) # A popup opens and says if you did something today.
+        sys.exit()
 
 if Have_you_finished_those_errands(username):       # If you have done a push, let me tell you.
     update="\nYou have done something today! :-)"
@@ -61,13 +67,11 @@ else:                                               # Else the process will cont
             toaster = ToastNotifier()               # This is the last notifier for today, promise.
             toaster.show_toast("Nice! You were productive today :-)!!",
                                 "See you tomorrow!!",
-                                icon_path="icon.ico",
                                 duration=10)
         else:
             toaster = ToastNotifier()               # Windows notifier created.
             toaster.show_toast("Hey! You haven't pushed yet!!",     # And its content.
                                 "Continue working to avoid that empty square!!",
-                                icon_path="icon.ico",
                                 duration=10)        # It will last for 10 seconds.
         time.sleep(60*7)                            # If you want to edit the time the notifier appears, edit this.
     sys.exit()
