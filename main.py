@@ -8,7 +8,6 @@ sg.theme('LightGray1')	# Add a touch of color
 
 # Code to create data where any information involved to this project will be saved.
 user_folder=os.environ['USERPROFILE'].replace('\\','/')+'/' # Gets the user path where the info folder will be saved.
-print(user_folder)
 name_new_dir= "py_set"                                      # Name of folder
 new_dir_path = user_folder + name_new_dir                   # New folder, in case this program grows, I will have this folder instead of a file.
 name_new_file="startup"                                     # Name of the file. If you change the name, change data_file in the file "pushed.py".
@@ -23,13 +22,12 @@ else:                                                       # Else, creates it.
 window = sg.PopupAutoClose(message,title="Creating data",auto_close_duration=3)
 
 data_file_path=user_folder+"{}/{}.json".format(name_new_dir,name_new_file)  # Path to the file.
-print(data_file_path)
 if os.path.isfile(data_file_path) and os.stat(data_file_path).st_size!=0:   # If the file isn't empty, we already have information inside it
     data_file=open(data_file_path,'r+')                                     # So we read it
     d=json.loads(data_file.read())                                          # Charge it and show it in a message.
-    msg='"Reading file...\n"Actual content of file has:\n'+\
+    msg='Reading file...\nActual content of file has:\n'+\
         ''.join(c for c in json.dumps(d, sort_keys=True, indent=4 * ' ') if not c in ['[',']','{','}',',','"'])+\
-        "\nThis content can be edited in {}/{}.json reading the readme\nfile.".format(name_new_dir,name_new_file)
+        "This content can be edited in {}/{}.json reading the readme.  ".format(name_new_dir,name_new_file)
     data_file.close()                                                       # Never leave open the file!
 else:    
     data_file=open(data_file_path,'w+')             # We open the file again, 
@@ -45,7 +43,7 @@ else:
     data_file.write(json.dumps(d))                  # writing over the file and sending a message with the updated content.
     msg="Creating new data file...\nThe content of data file will be:"+\
         ''.join(c for c in json.dumps(d, sort_keys=True, indent=4 * ' ') if not c in ['[',']','{','}',',','"'])+\
-        "\nThis content can be edited in {}/{}.json reading the readme\nfile.".format(name_new_dir,name_new_file)
+        "\nThis content can be edited in {}/{}.json reading the readme.  ".format(name_new_dir,name_new_file)
     data_file.close()                               # Again, closing!
 window = sg.PopupAutoClose(msg[:-2],title="Reading data",auto_close_duration=5) # Tiny advisement of what's inside 
 
@@ -63,10 +61,10 @@ gitmsg="Do you want to check your github?"
 popup=sg.popup_yes_no(gitmsg,title="Github")        # Pop up to let the user decide if s/he wants to be advised when he haven't done pushes to github.
 while True:
     if popup in (None,'No'):                        # if user closed the window using X or clicked Quit button
-        last_msg="""Closing...\nIf you change your mind, you can run just pushed.py.""" # The script will end without more.
+        last_msg="Closing...\nIf you change your mind, you can run just pushed.py." # The script will end without more.
         window = sg.PopupAutoClose(last_msg,title="Closing",auto_close_duration=4)
         break
     else: 
-        subprocess.call(["python", "pushed.py"])    # Else you will start pushed process to check your github processes.
-        break
-exit()                                              # And after all, this finishes.
+        import pushed    # Else you will start pushed process to check your github processes.
+        break            # Importing the file is absolutely better than making it a process. Best idea ever.
+exit()                   # And after all, this finishes.
