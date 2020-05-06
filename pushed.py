@@ -68,10 +68,10 @@ else:                                               # Else the process will cont
             toaster.show_toast("Nice! You were productive today :-)!!",
                                 "See you tomorrow!!",
                                 duration=10)
+            sys.exit()
         else:
             toaster = ToastNotifier()               # Windows notifier created.
             toaster.show_toast("Hey! You haven't pushed yet!!",     # And its content.
                                 "Continue working to avoid that empty square!!",
                                 duration=10)        # It will last for 10 seconds.
         time.sleep(60*7)                            # If you want to edit the time the notifier appears, edit this.
-    sys.exit()
