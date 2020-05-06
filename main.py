@@ -39,8 +39,8 @@ else:
                 'https://mail.google.com/',         # throught this file or entering the data_file_path file just adding or deleting the 
                 'https://web.whatsapp.com/'],       # lines you dis/like
         'programs':[
-                user_folder+'/AppData/Roaming/Telegram Desktop/Telegram.exe',   # Again, my programs, and you can edit them in the same way
-                user_folder+'/AppData/Local/Programs/Microsoft VS Code/Code.exe'# like the links
+                user_folder+'AppData/Roaming/Telegram Desktop/Telegram.exe',   # Again, my programs, and you can edit them in the same way
+                user_folder+'AppData/Local/Programs/Microsoft VS Code/Code.exe'# like the links
                 ]}
     data_file.write(json.dumps(d))                  # writing over the file and sending a message with the updated content.
     msg="Creating new data file...\nThe content of data file will be:"+\
