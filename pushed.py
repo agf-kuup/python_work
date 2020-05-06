@@ -12,7 +12,7 @@ sg.theme('LightGray1')	                # Color of all the next windows.
 
 user_folder=os.environ['USERPROFILE']                   # Gets the user path where the info folder is saved to ask for your github account
 data_file=open(user_folder+'/py_set/startup.json','r+')   # After that the file is opened. EDIT THIS NAME IF YOU CHANGE THE FILE NAME
-d=json.loads(data_file.read())                          # Reading content of file
+d=json.loads(data_file.read().replace('\\','/'))                          # Reading content of file
 if 'github' in d.keys():
     username=d['github']                                # Getting the github profile name
 else:                                                   # If data isn't registered yet

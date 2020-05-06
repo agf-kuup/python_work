@@ -24,7 +24,7 @@ window = sg.PopupAutoClose(message,title="Creating data",auto_close_duration=3)
 data_file_path=user_folder+"{}/{}.json".format(name_new_dir,name_new_file)  # Path to the file.
 if os.path.isfile(data_file_path) and os.stat(data_file_path).st_size!=0:   # If the file isn't empty, we already have information inside it
     data_file=open(data_file_path,'r+')                                     # So we read it
-    d=json.loads(data_file.read())                                          # Charge it and show it in a message.
+    d=json.loads(data_file.read().replace('\\','/'))                                          # Charge it and show it in a message.
     msg='Reading file...\nActual content of file has:\n'+\
         ''.join(c for c in json.dumps(d, sort_keys=True, indent=4 * ' ') if not c in ['[',']','{','}',',','"'])+\
         "This content can be edited in {}/{}.json reading the readme.  ".format(name_new_dir,name_new_file)
