@@ -1,4 +1,4 @@
-# python_work
+# python_work ![license](https://img.shields.io/badge/license-MIT-green)
  Python script to run programs and open tabs in the moment the script is executed.
  Also advices if you haven't updated anything new in your github (this last 
  idea is to give personal motivation).
